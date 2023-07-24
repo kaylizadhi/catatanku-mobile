@@ -4,25 +4,25 @@ import 'package:flutter/material.dart';
 import 'package:test_app/constants/colors.dart';
 import 'package:http/http.dart';
 
-class CreateNote extends StatefulWidget {
-  const CreateNote({Key? key}) : super(key: key);
+class UpdateNote extends StatefulWidget {
+  const UpdateNote({Key? key}) : super(key: key);
 
   @override
-  _CreateNoteState createState() => _CreateNoteState();
+  _UpdateNoteState createState() => _UpdateNoteState();
 }
 
-class _CreateNoteState extends State<CreateNote> {
-  String? title = "";
-  String? text = "";
+class _UpdateNoteState extends State<UpdateNote> {
+  String? title;
+  String? text;
   TextEditingController titleController = TextEditingController();
   TextEditingController textController = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Note"),
+        title: Text("Update Note"),
         backgroundColor: cMain,
       ),
       body: Column(
@@ -30,6 +30,7 @@ class _CreateNoteState extends State<CreateNote> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: TextFormField(
+              // initialValue: title,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Please enter a title";
@@ -52,6 +53,7 @@ class _CreateNoteState extends State<CreateNote> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             child: TextFormField(
+              // initialValue: text,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return "Please enter some text";
@@ -78,9 +80,9 @@ class _CreateNoteState extends State<CreateNote> {
               primary: cMain,
             ),
               onPressed: () async {
-                String createUrl = "http://127.0.0.1:8000/notes/post";
-                var url = Uri.parse(createUrl);
-                final response = await http.post(url,
+                String updateUrl = "http://127.0.0.1:8000/notes/put";
+                var url = Uri.parse(updateUrl);
+                final response = await http.put(url,
                   body: json.encode({
                     'title': title, 'text': text,
                   }));
@@ -88,7 +90,7 @@ class _CreateNoteState extends State<CreateNote> {
                 });
                 Navigator.pop(context);
               },
-              child: Text("Create")),
+              child: Text("Update")),
         ],
       ),
     );

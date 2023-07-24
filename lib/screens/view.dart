@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:test_app/constants/colors.dart';
 import 'package:test_app/models/note_models.dart';
+import 'package:test_app/screens/update.dart';
 
 class ViewNote extends StatelessWidget {
   const ViewNote({Key? key, required this.data}) : super(key: key);
@@ -55,6 +56,13 @@ class ViewNote extends StatelessWidget {
                 '${data.fields!.text}',
               ),
             ),
+            ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: cMain,
+            ), onPressed: () async {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => UpdateNote()));
+          }, child: Text('Update'),),
           ],
         ));
   }
