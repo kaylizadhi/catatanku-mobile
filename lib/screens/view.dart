@@ -67,17 +67,18 @@ class ViewNote extends StatelessWidget {
     Widget confirmDeleteButton = TextButton(
       child: Text("Delete"),
       onPressed: () async {
-        String deleteUrl = 'http://127.0.0.1:8000/notes/<id>/delete';
+        String deleteUrl = 'http://127.0.0.1:8000/notes/delete-post';
         var url = Uri.parse(deleteUrl);
         final response =
-            await http.post(url, body: json.encode({"id": data.pk}));
+            await http.post(url, body: json.encode({"pk": data.pk}));
+        Navigator.pop(context);
         Navigator.pop(context);
       },
     );
 
     AlertDialog alert = AlertDialog(
       title: Text("Delete Note"),
-      content: Text("Are you sure you want to delete ${data.fields!.title}?"),
+      content: Text("Are you sure you want to delete '${data.fields!.title}'?"),
       actions: [
         cancelButton,
         confirmDeleteButton,

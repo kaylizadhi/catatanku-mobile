@@ -1,6 +1,7 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:test_app/constants/colors.dart';
-import 'package:test_app/constants/urls.dart';
 import 'package:http/http.dart';
 
 class CreateNote extends StatefulWidget {
@@ -75,8 +76,15 @@ class _CreateNoteState extends State<CreateNote> {
             style: ElevatedButton.styleFrom(
               primary: cMain,
             ),
-              onPressed: () {
-                // POST URL
+              onPressed: () async {
+                String createUrl = "http://127.0.0.1:8000/notes/post";
+                var url = Uri.parse(createUrl);
+                final response = await http.post(url,
+                  body: json.encode({
+                    'title': title, 'text': text,
+                  }));
+                setState(() {
+                });
                 Navigator.pop(context);
               },
               child: Text("Create")),
