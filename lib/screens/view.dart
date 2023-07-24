@@ -60,12 +60,49 @@ class ViewNote extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               primary: cMain,
             ), onPressed: () async {
+                // alertDialog(
+                //   title: data.fields!.title,
+                //   text: data.fields!.text,
+                // );
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => UpdateNote()));
           }, child: Text('Update'),),
           ],
         ));
   }
+
+  // Future alertDialog({String? title, String? text}) {
+  //   TextEditingController titleController = TextEditingController();
+  //   TextEditingController textController = TextEditingController(); 
+
+  //   void updateData() {
+  //     String putUrl = 'http://127.0.0.1:8000/notes/put';
+  //     var url = Uri.parse(putUrl);
+  //     http.put(url, body: {
+  //       'title': title, 'text': text,
+  //     });
+  //   }
+
+  //   return showDialog(
+  //     context: context,
+  //     builder: (context) => new AlertDialog(
+  //       title: Column(
+  //         children: [
+  //           TextFormField(
+  //             onChanged: (String value) {
+  //               setState(() {
+  //                 title = value;
+  //               });
+  //             },
+  //             onFieldSubmitted: (v) {
+  //               updateData();
+  //             },
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
   showAlertDialog(BuildContext context) {
     Widget cancelButton = TextButton(
