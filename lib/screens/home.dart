@@ -2,11 +2,19 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:test_app/constants/colors.dart';
-import 'package:test_app/constants/urls.dart';
+import 'package:test_app/models/fetch_note.dart';
+import 'package:test_app/screens/create.dart';
 import 'package:test_app/widgets/note_item.dart';
 
 class Home extends StatefulWidget {
   const Home({ Key? key }) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final FetchNote notes = FetchNote();
 
   @override
   Widget build(BuildContext context) {
@@ -27,35 +35,30 @@ class Home extends StatefulWidget {
                 Container(
                   margin: EdgeInsets.only(top: 10, bottom: 20),
                 ),
-                NoteItem(),
-                NoteItem(),
-                NoteItem(),
-                NoteItem(),
-                NoteItem(),
-                NoteItem(),
-                NoteItem(),
               ],
               )
             )
         ])
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: cMain,
+        foregroundColor: cBackground,
+        splashColor: cGreen,
+        elevation: 12,
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) => CreateNote()
+          ));
+        },
+        child: const Icon(Icons.add)),
     );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
   }
 }
 
-//   @override
-//   _HomeState createState() => _HomeState();
-// }
+  
 
-// class _HomeState extends State<Home> {
-//   Client client = http.Client();
-// }
+
+
 
 // Widget searchBar() {
 //   return Container(
